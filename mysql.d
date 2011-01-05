@@ -638,7 +638,8 @@ struct st_list {
 alias st_list LIST;
 
 
-alias int (*list_walk_action)(void *,void *);
+//alias int (*list_walk_action)(void *,void *);
+alias int function( void *, void ) list_walk_action; 
 
 extern LIST *list_add(LIST *root,LIST *element);
 extern LIST *list_delete(LIST *root,LIST *element);
@@ -723,7 +724,8 @@ struct st_mem_root {
 
   uint first_block_usage;
 
-  void (*error_handler)();
+  //void (*error_handler)();
+  void function( void ) error_handler;
 };
 alias st_mem_root MEM_ROOT;
 
@@ -795,11 +797,17 @@ struct st_mysql_options {
 
   my_bool report_data_truncation;
 
-
+  /*
   int (*local_infile_init)(void **,  char *, void *);
   int (*local_infile_read)(void *, char *, uint);
   void (*local_infile_end)(void *);
   int (*local_infile_error)(void *, char *, uint);
+  */
+  int function    ( void **, char *, void * )  local_infile_init;
+  int function    ( void *,   char *, uint )     local_infile_read;
+  void function(  void * )                               local_infile_end;
+  int function    ( void *, char *, uint )       local_infile_error;
+
   void *local_infile_userdata;
 }
 
@@ -836,16 +844,30 @@ struct charset_info_st
 	ubyte    *sort_order;
 
 	uint      strxfrm_multiply;
+         
+        /*
 	int     (*strcoll)(byte *, ubyte *);
 	int     (*strxfrm)(ubyte *, ubyte *, int);
 	int     (*strnncoll)(ubyte *, int, ubyte *, int);
 	int     (*strnxfrm)(ubyte *, ubyte *, int, int);
-	my_bool (*like_range)(char *, uint, pchar, uint,
-	char *, char *, uint *, uint *);
+	my_bool (*like_range)(char *, uint, pchar, uint, char *, char *, uint *, uint *);
+        */
+       int function( byte *, ubyte * )                          strcoll;
+       int function( ubyte *, ubyte *, int )                strxfrm;
+       int function( ubyte *, int, ubyte *, int)         strnncoll;
+       int function( ubyte *, ubyte *, int, int )        strnxfrm;
+       my_bool function ( char *, uint, pchar, uint, char *, char *, uint *, uint *) like_range;
+ 
 	uint      mbmaxlen;
-	int     (*ismbchar)(char *, char *);
+
+	/*
+        int     (*ismbchar)(char *, char *);
 	my_bool (*ismbhead)(uint);
 	int     (*mbcharlen)(uint);
+        */
+        int function (char *, char *)   ismbchar;
+        my_bool function( uint )         ismbhead;
+        int function( uint )                   mbcharlen;
 }
 alias charset_info_st CHARSET_INFO;
 
