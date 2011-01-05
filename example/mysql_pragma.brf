@@ -1,0 +1,5 @@
+-O
+-release
+-cleanup
+-inline
+mysql_pragma.d

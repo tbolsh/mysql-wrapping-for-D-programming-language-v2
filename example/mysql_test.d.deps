@@ -1,0 +1,7 @@
+binary    dmd
+version   v2.051
+config    /etc/dmd.conf
+parse     mysql_test
+importall mysql_test
+import    object	(/usr/include/d/dmd/druntime/import/object.di)
+import    mysql	(mysql.d)

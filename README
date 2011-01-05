@@ -1,0 +1,81 @@
+Version 0.1  Date 09.04.2004
+Initial Release
+
+################################################
+Version 0.1.1  Date 15.04.2004
+
+Added two function
+char[][] mysql_fetch_array(MYSQL_RES *result)
+example:
+char[][] values;
+while ( (values = mysql_fetch_array(result)) != null) {
+	foreach (char wert[]; values) {
+		printf("wert = %.*s\n",wert);
+	}
+}	
+
+char[][char[]] mysql_fetch_hash(MYSQL_RES *result)
+example:
+char[][char[]] hash;
+while ((hash = mysql_fetch_hash(result)) != null) {
+	foreach ( char [] key; hash.keys.sort ){
+		printf("%.*s = %.*s\n",key,hash[key]);
+	}
+}	
+
+################################################
+
+Version 0.1.2 Date 23.04.2004
+Rename the function mysql_fetch_hash to 
+mysql_fetch_assoc
+
+################################################
+
+Version 0.1.3 Date 02.07.2004
+Change the propertie .size to .sizeof, to
+compile with dmd 0.94 .
+Thanks to Thomas Kühne
+
+################################################
+
+Version 0.1.4 Date 15.03.2005
+Add function mysql_escape in mysql.d modul.
+An example is in example/mysql_test.d
+Tested with MySql 4.0.x and 4.1.x under dmd 0.118 and gdc 0.10
+
+################################################
+
+Version 0.1.7 Date 14.12.2006
+Bug fix in an example File.
+Tested with dmd 0.177 and gdc 0.19
+
+################################################
+
+Version 0.1.8 Date 10.01.2007
+Link the mysql as shared Library
+See example mysql_shared.d
+Tested with dmd 1.0 and gdc 0.21
+
+For Windows Users
+coffimplib libmysql.lib -f
+
+##################################################
+
+Version 0.1.9 Date 08.01.2008
+Ported for dmd 2.009 and gdc 0.2.4 configured with 
+--d-language-version=2 .
+For dmd 1.x, use Version 0.1.8
+
+##################################################
+
+Version 0.2.0 Date 11.01.2008
+New mysql_wrapper file with new function:
+- mysql_connect_d
+- mysql_query_d
+
+##################################################
+
+Version 0.2.2 Date 08.02.2008
+Resolved memeory leak in function mysql_fetch_array()
+and mysql_fetch_assoc()
+
