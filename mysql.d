@@ -1,6 +1,8 @@
 module mysql;
 import std.stdio;
 import std.string;
+import std.conv;
+
 extern (C) {
 
 
@@ -1371,7 +1373,7 @@ ubyte[][char[]] db_fetch_assoc(ref MYSQL_RES* result)
 	mysql_field_seek(result, 0);
 	while ((field = mysql_fetch_field(result)) != null)
 	{
-		char[] name = field.name[0 .. field.name_length].dup;
+		string name = to!string( field.name[0 .. field.name_length].dup );
 		
 		if (row[y] == null)
 			hash[name] = null;

@@ -1,7 +1,7 @@
 module mysql_wrapper;
 import mysql;
 import std.string;
-
+import std.conv;
 
 MYSQL * mysql_connect_d(MYSQL *mysql, string host,string user, string passwd, string db, uint port, string unix_socket, uint clientflag) {
 	return mysql_real_connect( mysql, cast(char*) host, cast(char*) user, cast(char*) passwd, cast(char*) db, port,
@@ -21,11 +21,11 @@ string[] mysql_fetch_array(MYSQL_RES *result) {
     if (row != null) {
         count = mysql_num_fields(result);
         for ( y = 0; count > y; y++)  {
-            werte ~= toString(row[y]);
+            werte ~= to!string(row[y]);
         }
     } else {
         werte = null;
-		mysql_free_result(result);
+	mysql_free_result(result);
     }
     return werte;
 }
@@ -58,7 +58,7 @@ string[string] mysql_fetch_assoc(MYSQL_RES *result) {
         //offset = mysql_field_seek(result,0);
         mysql_field_seek(result,0);
         while ( (fields = mysql_fetch_field(result)) != null) {
-            hash[toString(fields.name)] = cast(string) toString(row[y]);
+            hash[to!string(fields.name)] = cast(string) to!string(row[y]);
             y++;
         }
     } else {
