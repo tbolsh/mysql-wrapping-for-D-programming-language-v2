@@ -639,7 +639,7 @@ alias st_list LIST;
 
 
 //alias int (*list_walk_action)(void *,void *);
-alias int function( void *, void ) list_walk_action; 
+alias int function( void *, void * ) list_walk_action; 
 
 extern LIST *list_add(LIST *root,LIST *element);
 extern LIST *list_delete(LIST *root,LIST *element);
@@ -725,7 +725,7 @@ struct st_mem_root {
   uint first_block_usage;
 
   //void (*error_handler)();
-  void function( void ) error_handler;
+  void function( ) error_handler;
 };
 alias st_mem_root MEM_ROOT;
 

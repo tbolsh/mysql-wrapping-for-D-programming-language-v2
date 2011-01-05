@@ -87,9 +87,9 @@ Adjusted to work with dmd v2.051:
   in mysql.d 
     inout is substituted to ref in parameter lists of 3 functions
     hash key (name) converted to string using to!string from std.conv
-    to!string used intead of toString
+    to!string used instead of toString
   in mysql_wrapper.d
-    to!string used intead of toString
+    to!string used instead of toString
   in h3n.d
     endless loop is commented out, h3n used as test
   
@@ -97,4 +97,11 @@ Adjusted to work with dmd v2.051:
     dmd -c -d mysql.d
     dmd -c -d mysql_wrapper.d
     dmd h3n.d -d -Lmysql.o -Lmysql_wrapper.o -L/usr/lib/libmysqlclient.a 
+
+If dgc is properly made to implement D ver. 2 ( https://bitbucket.org/goshawk/gdc/wiki/Home#installation )
+then everything works with gdc 2 dmd options translator:
+
+    gdmd -c -d mysql.d
+    gdmd -c -d mysql_wrapper.d
+    gdmd h3n.d -d -Lmysql.o -Lmysql_wrapper.o -L/usr/lib/libmysqlclient.a
 
