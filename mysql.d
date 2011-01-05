@@ -1049,13 +1049,17 @@ my_bool mysql_slave_send_query(MYSQL *mysql,  char *q,
 
 void
 mysql_set_local_infile_handler(MYSQL *mysql,
-                               int (*local_infile_init)(void **,  char *,
-                            void *),
-                               int (*local_infile_read)(void *, char *,
-                                                        uint),
+                               /*
+                               int (*local_infile_init)(void **,  char *,   void *),
+                               int (*local_infile_read)(void *, char *,    uint),
                                void (*local_infile_end)(void *),
-                               int (*local_infile_error)(void *, char*,
-                                                         uint),
+                               int (*local_infile_error)(void *, char*,   uint),
+                                */
+                                int function    ( void **, char *, void * )  local_infile_init,
+                                int function    ( void *,   char *, uint )     local_infile_read,
+                                void function(  void * )                               local_infile_end,
+                                int function    ( void *, char *, uint )       local_infile_error,
+                               
                                void *);
 
 void
