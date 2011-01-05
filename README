@@ -79,3 +79,22 @@ Version 0.2.2 Date 08.02.2008
 Resolved memeory leak in function mysql_fetch_array()
 and mysql_fetch_assoc()
 
+##################################################
+
+Version 0.2.3 Date 01.05.2011, Timofei Bolshakov
+
+Adjusted to work with dmd v2.051:
+  in mysql.d 
+    inout is substituted to ref in parameter lists of 3 functions
+    hash key (name) converted to string using to!string from std.conv
+    to!string used intead of toString
+  in mysql_wrapper.d
+    to!string used intead of toString
+  in h3n.d
+    endless loop is commented out, h3n used as test
+  
+  Compilation:
+    dmd -c -d mysql.d
+    dmd -c -d mysql_wrapper.d
+    dmd h3n.d -d -Lmysql.o -Lmysql_wrapper.o -L/usr/lib/libmysqlclient.a 
+
